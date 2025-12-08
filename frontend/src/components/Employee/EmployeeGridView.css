@@ -1,0 +1,90 @@
+.employee-grid-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.employee-grid {
+  min-width: 100%;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.grid-header {
+  display: table-row;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.grid-row {
+  display: table-row;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.grid-row:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid-cell {
+  display: table-cell;
+  padding: 16px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #333;
+}
+
+.header-cell {
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: none;
+  white-space: nowrap;
+}
+
+.attendance-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.attendance-badge.high {
+  background: #10b981;
+  color: white;
+}
+
+.attendance-badge.medium {
+  background: #f59e0b;
+  color: white;
+}
+
+.attendance-badge.low {
+  background: #ef4444;
+  color: white;
+}
+
+@media (max-width: 1200px) {
+  .grid-cell {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+  
+  .header-cell {
+    font-size: 12px;
+  }
+}
+
