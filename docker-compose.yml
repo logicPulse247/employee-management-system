@@ -1,0 +1,74 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: ultraship-mongodb
+    restart: unless-stopped
+    ports:
+      - "${MONGODB_PORT:-27017}:27017"
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-ultraship_employees}
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ultraship-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ultraship-backend
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: ${PORT:-4000}
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongodb:27017/${MONGO_INITDB_DATABASE:-ultraship_employees}}
+      JWT_SECRET: ${JWT_SECRET:-ultraship-super-secret-jwt-key-change-in-production}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-30d}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:4000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - ultraship-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_GRAPHQL_URL: ${VITE_GRAPHQL_URL:-http://localhost:${BACKEND_PORT:-4000}/graphql}
+        VITE_ENV: ${VITE_ENV:-production}
+    container_name: ultraship-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-3000}:80"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - ultraship-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  ultraship-network:
+    driver: bridge
+

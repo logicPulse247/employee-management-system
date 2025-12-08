@@ -1,0 +1,83 @@
+# Development docker-compose file with hot reload
+services:
+  mongodb:
+    image: mongo:7
+    container_name: ultraship-mongodb-dev
+    restart: unless-stopped
+    ports:
+      - "${MONGODB_PORT:-27017}:27017"
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-ultraship_employees}
+    volumes:
+      - mongodb_data_dev:/data/db
+    networks:
+      - ultraship-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: ultraship-backend-dev
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT:-4000}:4000"
+    env_file:
+      - ./backend/.env
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      PORT: ${PORT:-4000}
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongodb:27017/${MONGO_INITDB_DATABASE:-ultraship_employees}}
+      JWT_SECRET: ${JWT_SECRET:-ultraship-super-secret-jwt-key-change-in-production}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-30d}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/package.json:/app/package.json
+      - ./backend/tsconfig.json:/app/tsconfig.json
+      - backend_node_modules:/app/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - ultraship-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: ultraship-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    env_file:
+      - ./frontend/.env
+    environment:
+      VITE_GRAPHQL_URL: ${VITE_GRAPHQL_URL:-http://localhost:${BACKEND_PORT:-4000}/graphql}
+      VITE_ENV: ${VITE_ENV:-development}
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/package.json:/app/package.json
+      - ./frontend/index.html:/app/index.html
+      - ./frontend/vite.config.ts:/app/vite.config.ts
+      - ./frontend/postcss.config.js:/app/postcss.config.js
+      - ./frontend/tailwind.config.js:/app/tailwind.config.js
+      - ./frontend/.env:/app/.env
+      - frontend_node_modules:/app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - ultraship-network
+
+volumes:
+  mongodb_data_dev:
+    driver: local
+  frontend_node_modules:
+    driver: local
+  backend_node_modules:
+    driver: local
+
+networks:
+  ultraship-network:
+    driver: bridge
+
