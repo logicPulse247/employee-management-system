@@ -108,8 +108,8 @@ A full-stack employee management application built with TypeScript, GraphQL, Nod
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd ultraship
+   git clone https://github.com/logicPulse247/employee-management-system
+   cd employee-management-system
    ```
 
 2. **Install dependencies**
