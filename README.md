@@ -16,6 +16,8 @@ A full-stack employee management application built with TypeScript, GraphQL, Nod
 - **Responsive Design** - Works seamlessly on all devices
 - **Modern UI/UX** - Beautiful gradient designs and smooth animations
 
+- Deployed URL: https://employee-management-system-frontend-ixql.onrender.com/
+
 ### Backend
 
 - **GraphQL API** - Type-safe GraphQL schema with TypeScript
@@ -29,6 +31,8 @@ A full-stack employee management application built with TypeScript, GraphQL, Nod
   - Lean queries for better performance
   - Caching strategies
 - **MongoDB Integration** - Robust data persistence
+
+- Deployed URL: https://employee-management-system-050e.onrender.com/graphql
 
 ## 🛠️ Tech Stack
 
@@ -68,8 +72,8 @@ A full-stack employee management application built with TypeScript, GraphQL, Nod
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
-   cd ultraship
+   git clone https://github.com/logicPulse247/employee-management-system
+   cd employee-management-system
    ```
 
 2. **Create `.env` file in root** (optional, for custom JWT_SECRET):
