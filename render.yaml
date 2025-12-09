@@ -34,7 +34,7 @@ services:
 
   - type: web
     name: ultraship-frontend
-    env: static-site
+    runtime: static
 
     buildCommand: |
       cd frontend
