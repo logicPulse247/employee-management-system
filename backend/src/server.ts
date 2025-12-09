@@ -16,6 +16,10 @@ import { logger } from './utils/logger';
 
 const app = express();
 
+// Trust proxy - required when behind a reverse proxy (e.g., Render, Heroku, AWS ELB)
+// This allows express-rate-limit to correctly identify client IPs from X-Forwarded-For header
+app.set('trust proxy', true);
+
 // Security headers
 app.use(
   helmet({

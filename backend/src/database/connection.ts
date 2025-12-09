@@ -11,6 +11,7 @@ export const connectDB = async (retries = 0): Promise<void> => {
       maxPoolSize: 10,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
+      dbName: 'ultraship_employees',
     };
 
     await mongoose.connect(env.MONGODB_URI, options);
