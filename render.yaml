@@ -18,18 +18,15 @@ services:
         value: 30d
       - key: FRONTEND_URL
         fromService:
-          type: web
+          type: static
           name: ultraship-frontend
           property: host
         transform: https://${host}
     healthCheckPath: /health
 
   # Frontend Static Site
-  - type: web
+  - type: static
     name: ultraship-frontend
-    env: static
-    region: oregon
-    plan: starter
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
