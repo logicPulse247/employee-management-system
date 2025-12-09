@@ -1,4 +1,7 @@
 services:
+  # ============================
+  # Backend Web Service
+  # ============================
   - type: web
     name: ultraship-backend
     env: node
@@ -32,9 +35,12 @@ services:
 
     healthCheckPath: /health
 
+
+  # ============================
+  # Frontend Static Site (Vite)
+  # ============================
   - type: web
     name: ultraship-frontend
-    runtime: static
 
     buildCommand: |
       cd frontend
@@ -50,5 +56,6 @@ services:
           name: ultraship-backend
           property: host
         transform: "https://${host}/graphql"
+
       - key: VITE_ENV
         value: production
