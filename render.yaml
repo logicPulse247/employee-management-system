@@ -1,19 +1,26 @@
 services:
-  # Backend Web Service
   - type: web
     name: ultraship-backend
     env: node
     region: oregon
     plan: starter
-    buildCommand: cd backend && npm install && npm run build
-    startCommand: cd backend && npm start
+
+    buildCommand: |
+      cd backend
+      npm install
+      npm run build
+
+    startCommand: |
+      cd backend
+      npm start
+
     envVars:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        sync: false  # Set this in Render dashboard (MongoDB Atlas connection string or Render MongoDB)
+        sync: false
       - key: JWT_SECRET
-        sync: false  # Set this in Render dashboard (generate a strong random secret)
+        sync: false
       - key: JWT_EXPIRES_IN
         value: 30d
       - key: FRONTEND_URL
@@ -21,33 +28,27 @@ services:
           type: web
           name: ultraship-frontend
           property: host
-        transform: https://${host}
+        transform: "https://${host}"
+
     healthCheckPath: /health
 
-  # Frontend Static Site
   - type: web
     name: ultraship-frontend
-    runtime: static
-    buildCommand: cd frontend && npm install && npm run build
+    env: static-site
+
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+
     staticPublishPath: frontend/dist
+
     envVars:
       - key: VITE_GRAPHQL_URL
         fromService:
           type: web
           name: ultraship-backend
           property: host
-        transform: https://${host}/graphql
+        transform: "https://${host}/graphql"
       - key: VITE_ENV
         value: production
-
-  # MongoDB Database
-  # Note: Render doesn't support MongoDB directly in render.yaml
-  # Option 1: Use MongoDB Atlas (free tier available)
-  #   - Create account at https://www.mongodb.com/cloud/atlas
-  #   - Create cluster and get connection string
-  #   - Set MONGODB_URI in backend environment variables
-  # Option 2: Create MongoDB manually in Render Dashboard
-  #   - Go to Dashboard → New → MongoDB
-  #   - Create MongoDB service
-  #   - Copy connection string and set as MONGODB_URI
-
