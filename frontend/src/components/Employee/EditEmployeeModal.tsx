@@ -14,11 +14,7 @@ interface EditEmployeeModalProps {
   onSuccess?: () => void;
 }
 
-const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
-  employee,
-  onClose,
-  onSuccess,
-}) => {
+const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({ employee, onClose, onSuccess }) => {
   const [updateEmployee, { loading }] = useMutation(UPDATE_EMPLOYEE, {
     refetchQueries: [{ query: GET_EMPLOYEES }],
     onCompleted: () => {
@@ -26,7 +22,7 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
       onSuccess?.();
       onClose();
     },
-    onError: (error) => {
+    onError: error => {
       toast.error(error.message || 'Failed to update employee');
     },
   });
@@ -75,11 +71,14 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
     >
       <div
         className="bg-white rounded-xl sm:rounded-2xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         {/* Header - Responsive */}
         <div className="bg-gradient-to-r from-primary-500 to-secondary-600 p-4 sm:p-6 rounded-t-xl sm:rounded-t-2xl flex justify-between items-center sticky top-0 z-10">
-          <h2 id="edit-employee-title" className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
+          <h2
+            id="edit-employee-title"
+            className="text-lg sm:text-xl lg:text-2xl font-bold text-white"
+          >
             Edit Employee
           </h2>
           <button
@@ -101,7 +100,10 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
               {/* Form Fields - Responsive grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
                 <div>
-                  <label htmlFor="edit-name" className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <label
+                    htmlFor="edit-name"
+                    className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2"
+                  >
                     Name *
                   </label>
                   <Field
@@ -121,13 +123,15 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                       }
                     `}
                   />
-                  <ErrorMessage name="name" component="div" className="mt-1 text-xs sm:text-sm text-red-600" />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className="mt-1 text-xs sm:text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Age *
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Age *</label>
                   <Field
                     name="age"
                     type="number"
@@ -141,9 +145,7 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Class *
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Class *</label>
                   <Field
                     name="class"
                     type="text"
@@ -153,13 +155,15 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                   />
-                  <ErrorMessage name="class" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="class"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email *
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
                   <Field
                     name="email"
                     type="email"
@@ -169,7 +173,11 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                   />
-                  <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
@@ -185,13 +193,15 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                   />
-                  <ErrorMessage name="department" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="department"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Position
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Position</label>
                   <Field
                     name="position"
                     type="text"
@@ -201,7 +211,11 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                   />
-                  <ErrorMessage name="position" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="position"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
@@ -218,13 +232,15 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                   />
-                  <ErrorMessage name="attendance" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="attendance"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Salary
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Salary</label>
                   <Field
                     name="salary"
                     type="number"
@@ -235,7 +251,11 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                   />
-                  <ErrorMessage name="salary" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="salary"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div className="md:col-span-2">
@@ -252,12 +272,19 @@ const EditEmployeeModal: React.FC<EditEmployeeModalProps> = ({
                         : 'border-gray-300 focus:border-primary-500'
                     }`}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      const subjects = e.target.value.split(',').map(s => s.trim()).filter(s => s);
+                      const subjects = e.target.value
+                        .split(',')
+                        .map(s => s.trim())
+                        .filter(s => s);
                       setFieldValue('subjects', subjects);
                     }}
                     value={values.subjects.join(', ')}
                   />
-                  <ErrorMessage name="subjects" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="subjects"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
               </div>
 

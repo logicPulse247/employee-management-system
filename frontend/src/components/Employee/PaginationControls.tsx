@@ -16,7 +16,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
   pagination,
   pageSize,
   onPageChange,
-  onPageSizeChange
+  onPageSizeChange,
 }) => {
   return (
     <div className="mt-6 sm:mt-8 p-4 sm:p-5 bg-white rounded-xl shadow-md">
@@ -29,7 +29,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
             </label>
             <select
               value={pageSize}
-              onChange={(e) => onPageSizeChange(Number(e.target.value))}
+              onChange={e => onPageSizeChange(Number(e.target.value))}
               className="
                 flex-1 sm:flex-none
                 px-3 py-2
@@ -49,7 +49,8 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
             </select>
           </div>
           <div className="text-xs sm:text-sm font-semibold text-gray-600 text-center sm:text-left">
-            Showing {((pagination.page - 1) * pageSize) + 1} to {Math.min(pagination.page * pageSize, pagination.total)} of {pagination.total} employees
+            Showing {(pagination.page - 1) * pageSize + 1} to{' '}
+            {Math.min(pagination.page * pageSize, pagination.total)} of {pagination.total} employees
           </div>
         </div>
 

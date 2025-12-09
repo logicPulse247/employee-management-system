@@ -4,7 +4,10 @@ import { GET_EMPLOYEES } from '../graphql/queries';
 import { EmployeeFilters, SortInput, Employee, PaginationInfo } from '../types';
 import { PAGINATION } from '../constants';
 
-export const useEmployees = (initialPage: number = PAGINATION.DEFAULT_PAGE, initialPageSize: number = PAGINATION.DEFAULT_PAGE_SIZE) => {
+export const useEmployees = (
+  initialPage: number = PAGINATION.DEFAULT_PAGE,
+  initialPageSize: number = PAGINATION.DEFAULT_PAGE_SIZE
+) => {
   const [page, setPage] = useState<number>(initialPage);
   const [pageSize, setPageSize] = useState<number>(initialPageSize);
   const [filters, setFilters] = useState<EmployeeFilters>({});
@@ -20,18 +23,21 @@ export const useEmployees = (initialPage: number = PAGINATION.DEFAULT_PAGE, init
     fetchPolicy: 'cache-and-network',
   });
 
-  const handleFilterChange = useCallback((key: keyof EmployeeFilters, value: string | number | undefined) => {
-    setFilters(prev => {
-      const newFilters = { ...prev };
-      if (value === '' || value === undefined) {
-        delete newFilters[key];
-      } else {
-        newFilters[key] = value as any;
-      }
-      setPage(PAGINATION.DEFAULT_PAGE);
-      return newFilters;
-    });
-  }, []);
+  const handleFilterChange = useCallback(
+    (key: keyof EmployeeFilters, value: string | number | undefined) => {
+      setFilters(prev => {
+        const newFilters = { ...prev };
+        if (value === '' || value === undefined) {
+          delete newFilters[key];
+        } else {
+          newFilters[key] = value as any;
+        }
+        setPage(PAGINATION.DEFAULT_PAGE);
+        return newFilters;
+      });
+    },
+    []
+  );
 
   const handleSortChange = useCallback((field: string) => {
     setSort(prev => {
@@ -47,7 +53,10 @@ export const useEmployees = (initialPage: number = PAGINATION.DEFAULT_PAGE, init
     setPage(PAGINATION.DEFAULT_PAGE);
   }, []);
 
-  const employeesData = data as { employees?: { employees?: Employee[]; pagination?: PaginationInfo } } | null | undefined;
+  const employeesData = data as
+    | { employees?: { employees?: Employee[]; pagination?: PaginationInfo } }
+    | null
+    | undefined;
 
   return {
     employees: employeesData?.employees?.employees || [],

@@ -13,15 +13,9 @@ export const EmployeeTableSkeleton: React.FC = () => {
 
         {/* Rows */}
         {[...Array(6)].map((_, rowIndex) => (
-          <div
-            key={rowIndex}
-            className="grid grid-cols-10 gap-4 p-4 border-b border-gray-200"
-          >
+          <div key={rowIndex} className="grid grid-cols-10 gap-4 p-4 border-b border-gray-200">
             {[...Array(10)].map((_, colIndex) => (
-              <div
-                key={colIndex}
-                className="px-2 animate-pulse"
-              >
+              <div key={colIndex} className="px-2 animate-pulse">
                 <div className="h-4 bg-gray-200 rounded w-full"></div>
               </div>
             ))}

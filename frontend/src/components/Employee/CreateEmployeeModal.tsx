@@ -12,10 +12,7 @@ interface CreateEmployeeModalProps {
   onSuccess?: () => void;
 }
 
-const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
-  onClose,
-  onSuccess,
-}) => {
+const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({ onClose, onSuccess }) => {
   const [addEmployee, { loading }] = useMutation(ADD_EMPLOYEE, {
     refetchQueries: [{ query: GET_EMPLOYEES }],
     onCompleted: () => {
@@ -23,7 +20,7 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
       onSuccess?.();
       onClose();
     },
-    onError: (error) => {
+    onError: error => {
       toast.error(error.message || 'Failed to create employee');
     },
   });
@@ -50,11 +47,14 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
     >
       <div
         className="bg-white rounded-xl sm:rounded-2xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         {/* Header - Responsive */}
         <div className="bg-gradient-to-r from-primary-500 to-secondary-600 p-4 sm:p-6 rounded-t-xl sm:rounded-t-2xl flex justify-between items-center sticky top-0 z-10">
-          <h2 id="create-employee-title" className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
+          <h2
+            id="create-employee-title"
+            className="text-lg sm:text-xl lg:text-2xl font-bold text-white"
+          >
             Create New Employee
           </h2>
           <button
@@ -71,12 +71,12 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
           validationSchema={toFormikValidationSchema(employeeSchema)}
           validateOnBlur={true}
           validateOnChange={true}
-          onSubmit={async (values) => {
+          onSubmit={async values => {
             const input: any = {
               name: values.name,
               age: values.age,
               class: values.class,
-              subjects: values.subjects.filter((s) => s.trim() !== ''),
+              subjects: values.subjects.filter(s => s.trim() !== ''),
               attendance: values.attendance,
               email: values.email,
             };
@@ -93,7 +93,10 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
               {/* Form Fields - Responsive grid: 1 column on mobile, 2 on tablet+ */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label htmlFor="create-name" className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                  <label
+                    htmlFor="create-name"
+                    className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2"
+                  >
                     Name *
                   </label>
                   <Field
@@ -114,13 +117,15 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     `}
                     placeholder="Enter employee name"
                   />
-                  <ErrorMessage name="name" component="div" className="mt-1 text-xs sm:text-sm text-red-600" />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className="mt-1 text-xs sm:text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email *
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
                   <Field
                     name="email"
                     type="email"
@@ -131,13 +136,15 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     }`}
                     placeholder="employee@ultraship.com"
                   />
-                  <ErrorMessage name="email" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Age *
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Age *</label>
                   <Field
                     name="age"
                     type="number"
@@ -152,9 +159,7 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Class *
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Class *</label>
                   <Field
                     name="class"
                     type="text"
@@ -165,7 +170,11 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     }`}
                     placeholder="Engineering, Marketing, etc."
                   />
-                  <ErrorMessage name="class" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="class"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
@@ -182,13 +191,15 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     }`}
                     placeholder="IT, Marketing, etc."
                   />
-                  <ErrorMessage name="department" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="department"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Position
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Position</label>
                   <Field
                     name="position"
                     type="text"
@@ -199,7 +210,11 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     }`}
                     placeholder="Software Engineer, Manager, etc."
                   />
-                  <ErrorMessage name="position" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="position"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
@@ -216,13 +231,15 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     }`}
                     placeholder="0-100"
                   />
-                  <ErrorMessage name="attendance" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="attendance"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Salary
-                  </label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Salary</label>
                   <Field
                     name="salary"
                     type="number"
@@ -233,7 +250,11 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     }`}
                     placeholder="50000"
                   />
-                  <ErrorMessage name="salary" component="div" className="mt-1 text-sm text-red-600" />
+                  <ErrorMessage
+                    name="salary"
+                    component="div"
+                    className="mt-1 text-sm text-red-600"
+                  />
                 </div>
               </div>
 
@@ -277,7 +298,11 @@ const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({
                     </div>
                   )}
                 </FieldArray>
-                <ErrorMessage name="subjects" component="div" className="mt-1 text-sm text-red-600" />
+                <ErrorMessage
+                  name="subjects"
+                  component="div"
+                  className="mt-1 text-sm text-red-600"
+                />
               </div>
 
               {/* Action Buttons - Responsive */}

@@ -15,13 +15,20 @@ interface EmployeeGridViewProps {
  * Tablet (md): Simplified table with key columns
  * Mobile: Card-based layout for better UX
  */
-const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmployeeClick, onActionClick, isAdmin = false }) => {
+const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({
+  employees,
+  onEmployeeClick,
+  onActionClick,
+  isAdmin = false,
+}) => {
   return (
     <>
       {/* Desktop Table View (lg+) */}
       <div className="hidden lg:block w-full overflow-x-auto my-4 sm:my-5 bg-white rounded-xl shadow-lg">
         <div className="min-w-[1400px] inline-block">
-          <div className={`grid ${isAdmin && onActionClick ? 'grid-cols-[80px_150px_80px_120px_200px_150px_150px_200px_120px_120px_200px]' : 'grid-cols-[80px_150px_80px_120px_200px_150px_150px_200px_120px_120px]'} gap-3 lg:gap-4 p-3 lg:p-4 bg-gradient-to-r from-primary-500 to-secondary-600 text-white font-semibold text-xs uppercase tracking-wider sticky top-0 z-10`}>
+          <div
+            className={`grid ${isAdmin && onActionClick ? 'grid-cols-[80px_150px_80px_120px_200px_150px_150px_200px_120px_120px_200px]' : 'grid-cols-[80px_150px_80px_120px_200px_150px_150px_200px_120px_120px]'} gap-3 lg:gap-4 p-3 lg:p-4 bg-gradient-to-r from-primary-500 to-secondary-600 text-white font-semibold text-xs uppercase tracking-wider sticky top-0 z-10`}
+          >
             <div className="px-2">ID</div>
             <div className="px-2">Name</div>
             <div className="px-2">Age</div>
@@ -32,66 +39,82 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
             <div className="px-2">Subjects</div>
             <div className="px-2">Attendance</div>
             <div className="px-2">Salary</div>
-            {isAdmin && onActionClick && (
-              <div className="px-2 text-center font-bold">Actions</div>
-            )}
+            {isAdmin && onActionClick && <div className="px-2 text-center font-bold">Actions</div>}
           </div>
-          {employees.map((employee) => (
+          {employees.map(employee => (
             <div
               key={employee.id}
               className={`grid ${isAdmin && onActionClick ? 'grid-cols-[80px_150px_80px_120px_200px_150px_150px_200px_120px_120px_200px]' : 'grid-cols-[80px_150px_80px_120px_200px_150px_150px_200px_120px_120px]'} gap-3 lg:gap-4 p-3 lg:p-4 border-b border-gray-200 hover:bg-gradient-to-r hover:from-primary-50 hover:to-secondary-50 transition-all duration-300 ease-in-out hover:shadow-md`}
             >
               {/* ID */}
-              <div className="px-2 text-xs lg:text-sm text-gray-700 font-mono cursor-pointer" onClick={() => onEmployeeClick(employee)}>
-                <Tooltip content={employee.id}>
-                  {employee.id.slice(-6)}
-                </Tooltip>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-700 font-mono cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
+                <Tooltip content={employee.id}>{employee.id.slice(-6)}</Tooltip>
               </div>
 
               {/* Name */}
-              <div className="px-2 text-xs lg:text-sm font-medium text-gray-900 min-w-0 cursor-pointer" onClick={() => onEmployeeClick(employee)}>
+              <div
+                className="px-2 text-xs lg:text-sm font-medium text-gray-900 min-w-0 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
                 <Tooltip content={employee.name} alwaysShow={true}>
                   {employee.name}
                 </Tooltip>
               </div>
 
               {/* Age */}
-              <div className="px-2 text-xs lg:text-sm text-gray-700 cursor-pointer" onClick={() => onEmployeeClick(employee)}>{employee.age}</div>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-700 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
+                {employee.age}
+              </div>
 
               {/* Class */}
-              <div className="px-2 text-xs lg:text-sm text-gray-700 min-w-0 cursor-pointer" onClick={() => onEmployeeClick(employee)}>
-                <Tooltip content={employee.class}>
-                  {employee.class}
-                </Tooltip>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-700 min-w-0 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
+                <Tooltip content={employee.class}>{employee.class}</Tooltip>
               </div>
 
               {/* Email */}
-              <div className="px-2 text-xs lg:text-sm text-gray-600 min-w-0 cursor-pointer" onClick={() => onEmployeeClick(employee)}>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-600 min-w-0 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
                 <Tooltip content={employee.email} alwaysShow={true}>
                   {employee.email}
                 </Tooltip>
               </div>
 
               {/* Department */}
-              <div className="px-2 text-xs lg:text-sm text-gray-700 min-w-0 cursor-pointer" onClick={() => onEmployeeClick(employee)}>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-700 min-w-0 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
                 <Tooltip content={employee.department || 'N/A'}>
                   {employee.department || 'N/A'}
                 </Tooltip>
               </div>
 
               {/* Position */}
-              <div className="px-2 text-xs lg:text-sm text-gray-700 min-w-0 cursor-pointer" onClick={() => onEmployeeClick(employee)}>
-                <Tooltip content={employee.position || 'N/A'}>
-                  {employee.position || 'N/A'}
-                </Tooltip>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-700 min-w-0 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
+                <Tooltip content={employee.position || 'N/A'}>{employee.position || 'N/A'}</Tooltip>
               </div>
 
               {/* Subjects - Display as chips */}
               <div className="px-2 text-xs lg:text-sm min-w-0">
-                <div className="flex flex-wrap gap-1 max-w-full" onClick={(e) => e.stopPropagation()}>
+                <div className="flex flex-wrap gap-1 max-w-full" onClick={e => e.stopPropagation()}>
                   {employee.subjects.slice(0, 3).map((subject, idx) => (
                     <Tooltip key={idx} content={subject} alwaysShow={true}>
-                      <span className="
+                      <span
+                        className="
                         inline-block
                         px-2 py-0.5
                         bg-gradient-to-r from-primary-100 to-secondary-100
@@ -100,14 +123,19 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                         text-xs font-medium
                         truncate max-w-[100px]
                         cursor-default
-                      ">
+                      "
+                      >
                         {subject}
                       </span>
                     </Tooltip>
                   ))}
                   {employee.subjects.length > 3 && (
-                    <Tooltip content={`${employee.subjects.slice(3).join(', ')} (${employee.subjects.length - 3} more)`} alwaysShow={true}>
-                      <span className="
+                    <Tooltip
+                      content={`${employee.subjects.slice(3).join(', ')} (${employee.subjects.length - 3} more)`}
+                      alwaysShow={true}
+                    >
+                      <span
+                        className="
                         inline-block
                         px-2 py-0.5
                         bg-gray-100
@@ -115,7 +143,8 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                         rounded-full
                         text-xs font-medium
                         cursor-default
-                      ">
+                      "
+                      >
                         +{employee.subjects.length - 3}
                       </span>
                     </Tooltip>
@@ -130,8 +159,8 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                     employee.attendance >= 80
                       ? 'bg-green-100 text-green-800'
                       : employee.attendance >= 60
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-red-100 text-red-800'
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : 'bg-red-100 text-red-800'
                   }`}
                 >
                   {employee.attendance}%
@@ -139,7 +168,10 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
               </div>
 
               {/* Salary */}
-              <div className="px-2 text-xs lg:text-sm text-gray-700 cursor-pointer" onClick={() => onEmployeeClick(employee)}>
+              <div
+                className="px-2 text-xs lg:text-sm text-gray-700 cursor-pointer"
+                onClick={() => onEmployeeClick(employee)}
+              >
                 {employee.salary ? `$${employee.salary.toLocaleString()}` : 'N/A'}
               </div>
 
@@ -147,7 +179,7 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
               {isAdmin && onActionClick && (
                 <div className="px-2 flex items-center gap-2 justify-center flex-wrap">
                   <button
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       onActionClick('edit', employee);
                     }}
@@ -171,7 +203,7 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                     <span>Edit</span>
                   </button>
                   <button
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       onActionClick('delete', employee);
                     }}
@@ -204,7 +236,7 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
       {/* Tablet/Mobile Card View */}
       <div className="lg:hidden w-full my-4 sm:my-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-          {employees.map((employee) => (
+          {employees.map(employee => (
             <div
               key={employee.id}
               className="bg-white rounded-xl p-4 sm:p-5 shadow-md hover:shadow-lg cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.02] border border-gray-100"
@@ -228,8 +260,8 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                       employee.attendance >= 80
                         ? 'bg-green-100 text-green-800'
                         : employee.attendance >= 60
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-red-100 text-red-800'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-red-100 text-red-800'
                     }`}
                   >
                     {employee.attendance}%
@@ -237,7 +269,7 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                   {isAdmin && onActionClick && (
                     <div className="flex gap-1.5">
                       <button
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           onActionClick('edit', employee);
                         }}
@@ -260,7 +292,7 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                         <span className="hidden sm:inline">Edit</span>
                       </button>
                       <button
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation();
                           onActionClick('delete', employee);
                         }}
@@ -301,7 +333,9 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                   <div className="min-w-0">
                     <span className="text-gray-500 font-medium">Dept:</span>
                     <Tooltip content={employee.department}>
-                      <span className="ml-1 text-gray-900 font-semibold truncate block">{employee.department}</span>
+                      <span className="ml-1 text-gray-900 font-semibold truncate block">
+                        {employee.department}
+                      </span>
                     </Tooltip>
                   </div>
                 )}
@@ -309,7 +343,9 @@ const EmployeeGridView: React.FC<EmployeeGridViewProps> = ({ employees, onEmploy
                   <div className="min-w-0">
                     <span className="text-gray-500 font-medium">Position:</span>
                     <Tooltip content={employee.position}>
-                      <span className="ml-1 text-gray-900 font-semibold truncate block">{employee.position}</span>
+                      <span className="ml-1 text-gray-900 font-semibold truncate block">
+                        {employee.position}
+                      </span>
                     </Tooltip>
                   </div>
                 )}

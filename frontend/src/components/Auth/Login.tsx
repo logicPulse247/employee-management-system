@@ -18,10 +18,18 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: LoginFormValues) => {
     try {
       const result = await loginMutation({
-        variables: { username: values.username, password: values.password }
+        variables: { username: values.username, password: values.password },
       });
 
-      const data = result.data as { login?: { token: string; user: { id: string; username: string; email: string; role: 'admin' | 'employee' } } } | null | undefined;
+      const data = result.data as
+        | {
+            login?: {
+              token: string;
+              user: { id: string; username: string; email: string; role: 'admin' | 'employee' };
+            };
+          }
+        | null
+        | undefined;
 
       if (data?.login?.token && data?.login?.user) {
         login(data.login.token, data.login.user as User);
@@ -40,8 +48,12 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-500 via-primary-600 to-secondary-600 px-3 sm:px-4 py-4 sm:py-6">
       <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 w-full max-w-md animate-fade-in">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 text-center">Welcome Back</h2>
-        <p className="text-sm sm:text-base text-gray-600 text-center mb-6 sm:mb-8">Sign in to continue</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 text-center">
+          Welcome Back
+        </h2>
+        <p className="text-sm sm:text-base text-gray-600 text-center mb-6 sm:mb-8">
+          Sign in to continue
+        </p>
 
         <Formik
           initialValues={{ username: '', password: '' }}
@@ -57,7 +69,10 @@ const Login: React.FC = () => {
           {({ isSubmitting, errors, touched }) => (
             <Form className="space-y-4 sm:space-y-6">
               <div>
-                <label htmlFor="username" className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                <label
+                  htmlFor="username"
+                  className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2"
+                >
                   Username or Email
                 </label>
                 <Field
@@ -78,11 +93,18 @@ const Login: React.FC = () => {
                   `}
                   placeholder="Enter your username or email"
                 />
-                <ErrorMessage name="username" component="div" className="mt-1 text-xs sm:text-sm text-red-600" />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className="mt-1 text-xs sm:text-sm text-red-600"
+                />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2">
+                <label
+                  htmlFor="password"
+                  className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1 sm:mb-2"
+                >
                   Password
                 </label>
                 <Field
@@ -103,7 +125,11 @@ const Login: React.FC = () => {
                   `}
                   placeholder="Enter your password"
                 />
-                <ErrorMessage name="password" component="div" className="mt-1 text-xs sm:text-sm text-red-600" />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="mt-1 text-xs sm:text-sm text-red-600"
+                />
               </div>
 
               <button

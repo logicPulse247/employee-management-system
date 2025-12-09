@@ -25,7 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({
   menuItems,
   onNavigate,
   activePath,
-  rightContent
+  rightContent,
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -79,30 +79,26 @@ const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Title */}
-          <h1 className="
+          <h1
+            className="
             text-xl sm:text-2xl lg:text-3xl
             font-bold
             bg-gradient-to-r from-primary-500 to-secondary-600
             bg-clip-text text-transparent
             flex-1 text-center sm:text-left
-          ">
+          "
+          >
             {title}
           </h1>
 
           {/* Right content (e.g., logout button) */}
-          <div className="flex gap-2 sm:gap-3 items-center">
-            {rightContent}
-          </div>
+          <div className="flex gap-2 sm:gap-3 items-center">{rightContent}</div>
         </div>
 
         {/* Horizontal Menu - Desktop only (lg+) - Full width background */}
         <div className="bg-gradient-to-r from-primary-500 to-secondary-600 shadow-lg">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <HorizontalMenu
-              items={menuItems}
-              onNavigate={onNavigate}
-              activePath={activePath}
-            />
+            <HorizontalMenu items={menuItems} onNavigate={onNavigate} activePath={activePath} />
           </div>
         </div>
       </header>
@@ -168,10 +164,7 @@ const HorizontalMenu: React.FC<{
               >
                 {item.label}
                 {item.submenu && item.submenu.length > 0 && (
-                  <span
-                    className="text-xs transition-transform duration-300"
-                    aria-hidden="true"
-                  >
+                  <span className="text-xs transition-transform duration-300" aria-hidden="true">
                     ▼
                   </span>
                 )}
@@ -222,4 +215,3 @@ const HorizontalMenu: React.FC<{
 };
 
 export default Navbar;
-

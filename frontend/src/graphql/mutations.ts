@@ -69,4 +69,3 @@ export const DELETE_EMPLOYEE = gql`
     deleteEmployee(id: $id)
   }
 `;
-

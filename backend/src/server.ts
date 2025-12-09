@@ -23,40 +23,32 @@ app.set('trust proxy', true);
 // Security headers
 app.use(
   helmet({
-    contentSecurityPolicy: env.NODE_ENV === 'production'
-      ? undefined
-      : {
-          directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: [
-              "'self'",
-              "'unsafe-inline'",
-              "https://apollo-server-landing-page.cdn.apollographql.com"
-            ],
-            styleSrc: [
-              "'self'",
-              "'unsafe-inline'",
-              "https://apollo-server-landing-page.cdn.apollographql.com"
-            ],
-            imgSrc: [
-              "'self'",
-              "data:",
-              "https://apollo-server-landing-page.cdn.apollographql.com"
-            ],
-            connectSrc: [
-              "'self'",
-              "https://apollo-server-landing-page.cdn.apollographql.com"
-            ],
-            fontSrc: [
-              "'self'",
-              "https://apollo-server-landing-page.cdn.apollographql.com"
-            ],
-            manifestSrc: [
-              "'self'",
-              "https://apollo-server-landing-page.cdn.apollographql.com"
-            ],
+    contentSecurityPolicy:
+      env.NODE_ENV === 'production'
+        ? undefined
+        : {
+            directives: {
+              defaultSrc: ["'self'"],
+              scriptSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                'https://apollo-server-landing-page.cdn.apollographql.com',
+              ],
+              styleSrc: [
+                "'self'",
+                "'unsafe-inline'",
+                'https://apollo-server-landing-page.cdn.apollographql.com',
+              ],
+              imgSrc: [
+                "'self'",
+                'data:',
+                'https://apollo-server-landing-page.cdn.apollographql.com',
+              ],
+              connectSrc: ["'self'", 'https://apollo-server-landing-page.cdn.apollographql.com'],
+              fontSrc: ["'self'", 'https://apollo-server-landing-page.cdn.apollographql.com'],
+              manifestSrc: ["'self'", 'https://apollo-server-landing-page.cdn.apollographql.com'],
+            },
           },
-        },
   })
 );
 
@@ -75,7 +67,10 @@ app.use('/graphql', limiter);
 // Allow GraphQL playground and frontend
 app.use(
   cors({
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void
+    ) => {
       // In development, allow all origins for GraphQL Playground/Apollo Studio Sandbox
       if (env.NODE_ENV === 'development') {
         return callback(null, true);

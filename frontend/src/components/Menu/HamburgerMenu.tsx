@@ -12,7 +12,11 @@ interface HamburgerMenuProps {
   activePath?: string;
 }
 
-const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ items, onNavigate, activePath: propActivePath }) => {
+const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
+  items,
+  onNavigate,
+  activePath: propActivePath,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -125,43 +129,45 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ items, onNavigate, active
             </div>
 
             <ul className="list-none p-0 pt-4">
-            {items.map((item, index) => (
-              <li key={index} className="m-0">
-                <button
-                  className={`w-full flex items-center justify-between px-6 py-4 text-white text-base font-medium bg-transparent border-none cursor-pointer transition-all duration-300 text-left hover:bg-white hover:bg-opacity-10 hover:pl-8 ${
-                    item.submenu ? 'has-submenu' : ''
-                  } ${
-                    !item.submenu && currentPath === item.path ? 'bg-white bg-opacity-15' : ''
-                  }`}
-                  onClick={() => handleItemClick(item)}
-                >
-                  {item.label}
-                  {item.submenu && item.submenu.length > 0 && (
-                    <span className="text-xs transition-transform duration-300">
-                      {openSubmenu === item.label ? '▼' : '▶'}
-                    </span>
+              {items.map((item, index) => (
+                <li key={index} className="m-0">
+                  <button
+                    className={`w-full flex items-center justify-between px-6 py-4 text-white text-base font-medium bg-transparent border-none cursor-pointer transition-all duration-300 text-left hover:bg-white hover:bg-opacity-10 hover:pl-8 ${
+                      item.submenu ? 'has-submenu' : ''
+                    } ${
+                      !item.submenu && currentPath === item.path ? 'bg-white bg-opacity-15' : ''
+                    }`}
+                    onClick={() => handleItemClick(item)}
+                  >
+                    {item.label}
+                    {item.submenu && item.submenu.length > 0 && (
+                      <span className="text-xs transition-transform duration-300">
+                        {openSubmenu === item.label ? '▼' : '▶'}
+                      </span>
+                    )}
+                  </button>
+                  {item.submenu && item.submenu.length > 0 && openSubmenu === item.label && (
+                    <ul className="list-none p-0 m-0 bg-black bg-opacity-20 animate-slide-down">
+                      {item.submenu.map((subItem, subIndex) => (
+                        <li key={subIndex} className="m-0">
+                          <button
+                            className={`block w-full px-6 py-3 text-white text-opacity-90 text-sm bg-transparent border-none cursor-pointer transition-all duration-300 text-left hover:bg-white hover:bg-opacity-15 hover:pl-10 hover:text-white ${
+                              currentPath === subItem.path
+                                ? 'bg-white bg-opacity-20 text-white font-semibold'
+                                : ''
+                            }`}
+                            onClick={() => handleSubmenuClick(subItem.path)}
+                          >
+                            {subItem.label}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                </button>
-                {item.submenu && item.submenu.length > 0 && openSubmenu === item.label && (
-                  <ul className="list-none p-0 m-0 bg-black bg-opacity-20 animate-slide-down">
-                    {item.submenu.map((subItem, subIndex) => (
-                      <li key={subIndex} className="m-0">
-                        <button
-                          className={`block w-full px-6 py-3 text-white text-opacity-90 text-sm bg-transparent border-none cursor-pointer transition-all duration-300 text-left hover:bg-white hover:bg-opacity-15 hover:pl-10 hover:text-white ${
-                            currentPath === subItem.path ? 'bg-white bg-opacity-20 text-white font-semibold' : ''
-                          }`}
-                          onClick={() => handleSubmenuClick(subItem.path)}
-                        >
-                          {subItem.label}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </>
       )}
     </div>

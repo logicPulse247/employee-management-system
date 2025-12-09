@@ -24,11 +24,14 @@ const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
     >
       <div
         className="bg-white rounded-xl sm:rounded-2xl max-w-md w-full shadow-2xl animate-slide-up"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         {/* Header - Responsive */}
         <div className="bg-gradient-to-r from-red-500 to-red-600 p-4 sm:p-6 rounded-t-xl sm:rounded-t-2xl">
-          <h2 id="delete-confirm-title" className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
+          <h2
+            id="delete-confirm-title"
+            className="text-lg sm:text-xl lg:text-2xl font-bold text-white"
+          >
             Confirm Delete
           </h2>
         </div>
@@ -43,9 +46,7 @@ const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
             <p className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 break-words">
               {employee.name}?
             </p>
-            <p className="text-xs sm:text-sm text-gray-500">
-              This action cannot be undone.
-            </p>
+            <p className="text-xs sm:text-sm text-gray-500">This action cannot be undone.</p>
           </div>
 
           {/* Action Buttons - Responsive */}

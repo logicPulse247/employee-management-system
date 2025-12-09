@@ -24,7 +24,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onNavigate,
   activePath: propActivePath,
   isOpen,
-  onClose
+  onClose,
 }) => {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -131,21 +131,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                   transition-all duration-300 text-left
                   hover:bg-white hover:bg-opacity-10 hover:pl-6 sm:hover:pl-8
                   focus:outline-none focus:ring-2 focus:ring-white focus:ring-inset
-                  ${
-                    !item.submenu && currentPath === item.path
-                      ? 'bg-white bg-opacity-15'
-                      : ''
-                  }
+                  ${!item.submenu && currentPath === item.path ? 'bg-white bg-opacity-15' : ''}
                 `}
                 onClick={() => handleItemClick(item)}
                 aria-expanded={item.submenu && openSubmenu === item.label}
               >
                 <span>{item.label}</span>
                 {item.submenu && item.submenu.length > 0 && (
-                  <span
-                    className="text-xs transition-transform duration-300"
-                    aria-hidden="true"
-                  >
+                  <span className="text-xs transition-transform duration-300" aria-hidden="true">
                     {openSubmenu === item.label ? '▼' : '▶'}
                   </span>
                 )}
@@ -189,4 +182,3 @@ const Sidebar: React.FC<SidebarProps> = ({
 };
 
 export default Sidebar;
-

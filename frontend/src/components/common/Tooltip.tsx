@@ -13,7 +13,12 @@ interface TooltipProps {
  * Works on both desktop (hover) and mobile (long press)
  * Only shows if content is actually truncated (unless alwaysShow is true)
  */
-const Tooltip: React.FC<TooltipProps> = ({ content, children, className = '', alwaysShow = false }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  content,
+  children,
+  className = '',
+  alwaysShow = false,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isTruncated, setIsTruncated] = useState(false);
   const [position, setPosition] = useState<'top' | 'bottom'>('bottom');
@@ -52,17 +57,17 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children, className = '', al
       className={`relative ${className}`}
       onMouseEnter={() => shouldShowTooltip && setIsVisible(true)}
       onMouseLeave={() => setIsVisible(false)}
-      onTouchStart={(e) => {
+      onTouchStart={e => {
         if (shouldShowTooltip) {
           e.stopPropagation();
           setIsVisible(true);
         }
       }}
-      onTouchEnd={(e) => {
+      onTouchEnd={e => {
         e.stopPropagation();
         setTimeout(() => setIsVisible(false), 2000);
       }}
-      onClick={(e) => e.stopPropagation()}
+      onClick={e => e.stopPropagation()}
     >
       <div ref={contentRef} className="truncate">
         {children}
@@ -83,7 +88,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children, className = '', al
             left-1/2 transform -translate-x-1/2
           `}
           role="tooltip"
-          onClick={(e) => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
         >
           {content}
           {/* Tooltip arrow */}
@@ -92,10 +97,7 @@ const Tooltip: React.FC<TooltipProps> = ({ content, children, className = '', al
               absolute left-1/2 transform -translate-x-1/2
               w-0 h-0
               border-4 border-transparent
-              ${position === 'top'
-                ? 'top-full border-t-gray-900'
-                : 'bottom-full border-b-gray-900'
-              }
+              ${position === 'top' ? 'top-full border-t-gray-900' : 'bottom-full border-b-gray-900'}
             `}
           />
         </div>

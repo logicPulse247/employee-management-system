@@ -12,27 +12,25 @@ interface FiltersPanelProps {
  * Responsive filter inputs in a grid layout
  * Mobile: 1 column, Tablet: 2 columns, Desktop: 4 columns
  */
-const FiltersPanel: React.FC<FiltersPanelProps> = ({
-  filters,
-  onFilterChange,
-  onClearFilters
-}) => {
+const FiltersPanel: React.FC<FiltersPanelProps> = ({ filters, onFilterChange, onClearFilters }) => {
   return (
-    <div className="
+    <div
+      className="
       bg-white p-4 sm:p-6
       rounded-xl mb-4 sm:mb-6
       shadow-md
       grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
       gap-3 sm:gap-4
       animate-slide-down
-    ">
+    "
+    >
       <div className="flex flex-col gap-2">
         <label className="text-xs sm:text-sm font-semibold text-gray-600">Name</label>
         <input
           type="text"
           placeholder="Search by name..."
           value={filters.name || ''}
-          onChange={(e) => onFilterChange('name', e.target.value)}
+          onChange={e => onFilterChange('name', e.target.value)}
           className="
             w-full px-3 py-2
             border-2 border-gray-300 rounded-lg
@@ -49,7 +47,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
           type="text"
           placeholder="Filter by class..."
           value={filters.class || ''}
-          onChange={(e) => onFilterChange('class', e.target.value)}
+          onChange={e => onFilterChange('class', e.target.value)}
           className="
             w-full px-3 py-2
             border-2 border-gray-300 rounded-lg
@@ -66,7 +64,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
           type="text"
           placeholder="Filter by department..."
           value={filters.department || ''}
-          onChange={(e) => onFilterChange('department', e.target.value)}
+          onChange={e => onFilterChange('department', e.target.value)}
           className="
             w-full px-3 py-2
             border-2 border-gray-300 rounded-lg
@@ -83,7 +81,9 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
           type="number"
           placeholder="Min age"
           value={filters.minAge || ''}
-          onChange={(e) => onFilterChange('minAge', e.target.value ? parseInt(e.target.value) : undefined)}
+          onChange={e =>
+            onFilterChange('minAge', e.target.value ? parseInt(e.target.value) : undefined)
+          }
           className="
             w-full px-3 py-2
             border-2 border-gray-300 rounded-lg
@@ -100,7 +100,9 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({
           type="number"
           placeholder="Max age"
           value={filters.maxAge || ''}
-          onChange={(e) => onFilterChange('maxAge', e.target.value ? parseInt(e.target.value) : undefined)}
+          onChange={e =>
+            onFilterChange('maxAge', e.target.value ? parseInt(e.target.value) : undefined)
+          }
           className="
             w-full px-3 py-2
             border-2 border-gray-300 rounded-lg

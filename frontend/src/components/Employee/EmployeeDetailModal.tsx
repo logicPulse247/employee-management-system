@@ -14,7 +14,7 @@ const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
   onClose,
   onEdit,
   onDelete,
-  onFlag
+  onFlag,
 }) => {
   if (!employee) return null;
 
@@ -28,11 +28,14 @@ const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
     >
       <div
         className="bg-white rounded-xl sm:rounded-2xl max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-up"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         {/* Header - Responsive */}
         <div className="bg-gradient-to-r from-primary-500 to-secondary-600 p-4 sm:p-6 rounded-t-xl sm:rounded-t-2xl flex justify-between items-center sticky top-0 z-10">
-          <h2 id="employee-detail-title" className="text-lg sm:text-xl lg:text-2xl font-bold text-white">
+          <h2
+            id="employee-detail-title"
+            className="text-lg sm:text-xl lg:text-2xl font-bold text-white"
+          >
             Employee Details
           </h2>
           <button
@@ -50,54 +53,82 @@ const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
             <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full bg-gradient-to-br from-primary-500 to-secondary-600 flex items-center justify-center text-white text-2xl sm:text-3xl lg:text-4xl font-bold mx-auto mb-3 sm:mb-4 shadow-lg">
               {employee.name.charAt(0).toUpperCase()}
             </div>
-            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">{employee.name}</h3>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 break-all">{employee.email}</p>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">
+              {employee.name}
+            </h3>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 break-all">
+              {employee.email}
+            </p>
           </div>
 
           {/* Details Grid - Responsive: 1 column on mobile, 2 on tablet+ */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div className="p-3 sm:p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">ID</span>
-              <p className="text-sm sm:text-base text-gray-900 font-semibold mt-1 break-all">{employee.id}</p>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                ID
+              </span>
+              <p className="text-sm sm:text-base text-gray-900 font-semibold mt-1 break-all">
+                {employee.id}
+              </p>
             </div>
             <div className="p-3 sm:p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Age</span>
-              <p className="text-sm sm:text-base text-gray-900 font-semibold mt-1">{employee.age} years</p>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Age
+              </span>
+              <p className="text-sm sm:text-base text-gray-900 font-semibold mt-1">
+                {employee.age} years
+              </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Class</span>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Class
+              </span>
               <p className="text-base text-gray-900 font-semibold mt-1">{employee.class}</p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Department</span>
-              <p className="text-base text-gray-900 font-semibold mt-1">{employee.department || 'N/A'}</p>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Department
+              </span>
+              <p className="text-base text-gray-900 font-semibold mt-1">
+                {employee.department || 'N/A'}
+              </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Position</span>
-              <p className="text-base text-gray-900 font-semibold mt-1">{employee.position || 'N/A'}</p>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Position
+              </span>
+              <p className="text-base text-gray-900 font-semibold mt-1">
+                {employee.position || 'N/A'}
+              </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Attendance</span>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Attendance
+              </span>
               <p
                 className={`text-base font-semibold mt-1 ${
                   employee.attendance >= 80
                     ? 'text-green-600'
                     : employee.attendance >= 60
-                    ? 'text-yellow-600'
-                    : 'text-red-600'
+                      ? 'text-yellow-600'
+                      : 'text-red-600'
                 }`}
               >
                 {employee.attendance}%
               </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Salary</span>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Salary
+              </span>
               <p className="text-base text-gray-900 font-semibold mt-1">
                 {employee.salary ? `$${employee.salary.toLocaleString()}` : 'N/A'}
               </p>
             </div>
             <div className="p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">Join Date</span>
+              <span className="text-xs text-gray-500 uppercase tracking-wide font-semibold">
+                Join Date
+              </span>
               <p className="text-base text-gray-900 font-semibold mt-1">
                 {new Date(employee.joinDate).toLocaleDateString()}
               </p>
@@ -106,7 +137,9 @@ const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
 
           {/* Subjects - Responsive */}
           <div className="mb-4 sm:mb-6">
-            <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Subjects</h4>
+            <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
+              Subjects
+            </h4>
             <div className="flex flex-wrap gap-2 sm:gap-3">
               {employee.subjects.map((subject, index) => (
                 <span

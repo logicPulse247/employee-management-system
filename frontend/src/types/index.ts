@@ -56,4 +56,3 @@ export interface SortInput {
   field: string;
   order: 'ASC' | 'DESC';
 }
-

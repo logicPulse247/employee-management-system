@@ -55,7 +55,13 @@ const EmployeesPage: React.FC = () => {
       deleteEmployee: true,
     } as { deleteEmployee: boolean },
     update: (cache, { data }) => {
-      if (data && typeof data === 'object' && 'deleteEmployee' in data && data.deleteEmployee && deletingEmployee) {
+      if (
+        data &&
+        typeof data === 'object' &&
+        'deleteEmployee' in data &&
+        data.deleteEmployee &&
+        deletingEmployee
+      ) {
         const existingData = cache.readQuery<{
           employees: { employees: Employee[]; pagination: any };
         }>({
@@ -81,7 +87,7 @@ const EmployeesPage: React.FC = () => {
               employees: {
                 ...existingData.employees,
                 employees: existingData.employees.employees.filter(
-                  (emp) => emp.id !== deletingEmployee.id
+                  emp => emp.id !== deletingEmployee.id
                 ),
                 pagination: {
                   ...existingData.employees.pagination,
@@ -93,22 +99,24 @@ const EmployeesPage: React.FC = () => {
         }
       }
     },
-    refetchQueries: [{
-      query: GET_EMPLOYEES,
-      variables: {
-        page,
-        pageSize,
-        filters: Object.keys(filters).length > 0 ? filters : undefined,
-        sort
-      }
-    }],
+    refetchQueries: [
+      {
+        query: GET_EMPLOYEES,
+        variables: {
+          page,
+          pageSize,
+          filters: Object.keys(filters).length > 0 ? filters : undefined,
+          sort,
+        },
+      },
+    ],
     awaitRefetchQueries: false,
     onCompleted: () => {
       toast.success('Employee deleted successfully!');
       setDeletingEmployee(null);
       setSelectedEmployee(null);
     },
-    onError: (error) => {
+    onError: error => {
       refetch();
       toast.error(error.message || 'Failed to delete employee');
     },
@@ -120,18 +128,18 @@ const EmployeesPage: React.FC = () => {
       path: '/employees',
       submenu: [
         { label: 'All Employees', path: '/employees' },
-        { label: 'By Department', path: '/employees?filter=department' }
-      ]
+        { label: 'By Department', path: '/employees?filter=department' },
+      ],
     },
     {
       label: 'Reports',
       path: '/reports',
       submenu: [
         { label: 'Attendance Report', path: '/reports/attendance' },
-        { label: 'Performance Report', path: '/reports/performance' }
-      ]
+        { label: 'Performance Report', path: '/reports/performance' },
+      ],
     },
-    { label: 'Settings', path: '/settings' }
+    { label: 'Settings', path: '/settings' },
   ];
 
   // Handle menu navigation with proper route handling
@@ -144,7 +152,9 @@ const EmployeesPage: React.FC = () => {
         setShowFilters(true);
         navigate(route);
         setTimeout(() => {
-          const departmentInput = document.querySelector('input[placeholder="Filter by department..."]') as HTMLInputElement;
+          const departmentInput = document.querySelector(
+            'input[placeholder="Filter by department..."]'
+          ) as HTMLInputElement;
           if (departmentInput) {
             departmentInput.focus();
           }
@@ -287,8 +297,8 @@ const EmployeesPage: React.FC = () => {
           <PaginationControls
             pagination={pagination}
             pageSize={pageSize}
-            onPageChange={(newPage) => setPage(newPage)}
-            onPageSizeChange={(size) => {
+            onPageChange={newPage => setPage(newPage)}
+            onPageSizeChange={size => {
               setPageSize(size);
               setPage(1);
             }}

@@ -27,19 +27,11 @@ const EmployeeList: React.FC<EmployeeListProps> = ({
   error,
   onEmployeeClick,
   onActionClick,
-  isAdmin = false
+  isAdmin = false,
 }) => {
   // Loading state
   if (loading && employees.length === 0) {
-    return (
-      <>
-        {viewMode === 'grid' ? (
-          <EmployeeTableSkeleton />
-        ) : (
-          <EmployeeCardSkeleton />
-        )}
-      </>
-    );
+    return <>{viewMode === 'grid' ? <EmployeeTableSkeleton /> : <EmployeeCardSkeleton />}</>;
   }
 
   // Error state
@@ -50,9 +42,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({
         <div className="text-base sm:text-lg lg:text-xl text-red-600 mb-2 font-semibold">
           Error loading employees
         </div>
-        <div className="text-xs sm:text-sm lg:text-base text-gray-600 px-4">
-          {error.message}
-        </div>
+        <div className="text-xs sm:text-sm lg:text-base text-gray-600 px-4">{error.message}</div>
       </div>
     );
   }
@@ -79,14 +69,14 @@ const EmployeeList: React.FC<EmployeeListProps> = ({
         <EmployeeGridView
           employees={employees}
           onEmployeeClick={onEmployeeClick}
-          onActionClick={isAdmin ? (onActionClick || (() => {})) : undefined}
+          onActionClick={isAdmin ? onActionClick || (() => {}) : undefined}
           isAdmin={isAdmin}
         />
       ) : (
         <EmployeeTileView
           employees={employees}
           onEmployeeClick={onEmployeeClick}
-          onActionClick={isAdmin ? (onActionClick || (() => {})) : undefined}
+          onActionClick={isAdmin ? onActionClick || (() => {}) : undefined}
           isAdmin={isAdmin}
         />
       )}

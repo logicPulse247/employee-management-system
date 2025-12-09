@@ -20,12 +20,12 @@ const EmployeeTileView: React.FC<EmployeeTileViewProps> = ({
   employees,
   onEmployeeClick,
   onActionClick,
-  isAdmin = false
+  isAdmin = false,
 }) => {
   return (
     <div className="w-full py-4 sm:py-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-        {employees.map((employee) => (
+        {employees.map(employee => (
           <div
             key={employee.id}
             className="
@@ -65,7 +65,7 @@ const EmployeeTileView: React.FC<EmployeeTileViewProps> = ({
                       transform hover:scale-105
                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1
                     "
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       onActionClick('edit', employee);
                     }}
@@ -89,7 +89,7 @@ const EmployeeTileView: React.FC<EmployeeTileViewProps> = ({
                       transform hover:scale-105
                       focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1
                     "
-                    onClick={(e) => {
+                    onClick={e => {
                       e.stopPropagation();
                       onActionClick('delete', employee);
                     }}
@@ -120,7 +120,9 @@ const EmployeeTileView: React.FC<EmployeeTileViewProps> = ({
                 </div>
                 <div className="flex justify-between text-xs sm:text-sm">
                   <span className="text-gray-500 font-medium">Class:</span>
-                  <span className="text-gray-900 font-semibold truncate ml-2">{employee.class}</span>
+                  <span className="text-gray-900 font-semibold truncate ml-2">
+                    {employee.class}
+                  </span>
                 </div>
                 <div className="flex justify-between text-xs sm:text-sm">
                   <span className="text-gray-500 font-medium">Attendance:</span>
@@ -129,8 +131,8 @@ const EmployeeTileView: React.FC<EmployeeTileViewProps> = ({
                       employee.attendance >= 80
                         ? 'text-green-600'
                         : employee.attendance >= 60
-                        ? 'text-yellow-600'
-                        : 'text-red-600'
+                          ? 'text-yellow-600'
+                          : 'text-red-600'
                     }`}
                   >
                     {employee.attendance}%

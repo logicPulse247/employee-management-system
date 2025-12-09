@@ -97,7 +97,10 @@ const App: React.FC = () => {
                     path={ROUTES.REPORTS_ATTENDANCE}
                     element={
                       <PrivateRoute>
-                        <ComingSoonPage title="Attendance Report" description="Attendance reporting feature is coming soon." />
+                        <ComingSoonPage
+                          title="Attendance Report"
+                          description="Attendance reporting feature is coming soon."
+                        />
                       </PrivateRoute>
                     }
                   />
@@ -105,7 +108,10 @@ const App: React.FC = () => {
                     path={ROUTES.REPORTS_PERFORMANCE}
                     element={
                       <PrivateRoute>
-                        <ComingSoonPage title="Performance Report" description="Performance reporting feature is coming soon." />
+                        <ComingSoonPage
+                          title="Performance Report"
+                          description="Performance reporting feature is coming soon."
+                        />
                       </PrivateRoute>
                     }
                   />
@@ -113,7 +119,10 @@ const App: React.FC = () => {
                     path={ROUTES.REPORTS}
                     element={
                       <PrivateRoute>
-                        <ComingSoonPage title="Reports" description="Reporting features are coming soon." />
+                        <ComingSoonPage
+                          title="Reports"
+                          description="Reporting features are coming soon."
+                        />
                       </PrivateRoute>
                     }
                   />
@@ -121,7 +130,10 @@ const App: React.FC = () => {
                     path={ROUTES.SETTINGS}
                     element={
                       <PrivateRoute>
-                        <ComingSoonPage title="Settings" description="Settings page is coming soon." />
+                        <ComingSoonPage
+                          title="Settings"
+                          description="Settings page is coming soon."
+                        />
                       </PrivateRoute>
                     }
                   />

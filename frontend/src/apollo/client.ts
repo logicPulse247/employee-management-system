@@ -41,9 +41,7 @@ const errorLink = onError((error: any) => {
       const errorCode = extensions?.code as string;
       const statusCode = extensions?.statusCode as number;
 
-      logger.error(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      );
+      logger.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
 
       if (errorCode === 'AUTHENTICATION_ERROR' || statusCode === 401) {
         clearAuthData();
@@ -103,4 +101,3 @@ export const client = new ApolloClient({
     },
   },
 });
-

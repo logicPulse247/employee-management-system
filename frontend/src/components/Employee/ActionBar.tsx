@@ -25,7 +25,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
   onFiltersToggle,
   showFilters,
   onSortChange,
-  sortField
+  sortField,
 }) => {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
@@ -143,7 +143,7 @@ const ActionBar: React.FC<ActionBarProps> = ({
               shadow-sm hover:shadow-md
             "
             value={sortField || ''}
-            onChange={(e) => e.target.value && onSortChange(e.target.value)}
+            onChange={e => e.target.value && onSortChange(e.target.value)}
             aria-label="Sort by"
           >
             <option value="">Sort by...</option>

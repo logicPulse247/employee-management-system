@@ -12,7 +12,11 @@ interface HorizontalMenuProps {
   activePath?: string;
 }
 
-const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ items, onNavigate, activePath: propActivePath }) => {
+const HorizontalMenu: React.FC<HorizontalMenuProps> = ({
+  items,
+  onNavigate,
+  activePath: propActivePath,
+}) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [internalActivePath, setInternalActivePath] = useState<string>(window.location.pathname);
 
@@ -53,9 +57,7 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ items, onNavigate, acti
             >
               {item.label}
               {item.submenu && item.submenu.length > 0 && (
-                <span className="text-xs transition-transform duration-300">
-                  ▼
-                </span>
+                <span className="text-xs transition-transform duration-300">▼</span>
               )}
             </button>
             {item.submenu && item.submenu.length > 0 && hoveredItem === item.label && (
@@ -64,7 +66,9 @@ const HorizontalMenu: React.FC<HorizontalMenuProps> = ({ items, onNavigate, acti
                   <li key={subIndex} className="m-0">
                     <button
                       className={`block w-full px-6 py-3 text-gray-800 text-sm bg-transparent border-none cursor-pointer transition-all duration-300 text-left hover:bg-gradient-to-r hover:from-primary-500 hover:to-secondary-600 hover:text-white hover:pl-8 rounded ${
-                        activePath === subItem.path ? 'bg-gradient-to-r from-primary-500 to-secondary-600 text-white' : ''
+                        activePath === subItem.path
+                          ? 'bg-gradient-to-r from-primary-500 to-secondary-600 text-white'
+                          : ''
                       }`}
                       onClick={() => handleSubmenuClick(subItem.path)}
                     >

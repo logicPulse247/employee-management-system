@@ -12,12 +12,7 @@ interface CardProps {
  * Mobile: Full width with padding
  * Tablet+: Responsive with hover effects
  */
-const Card: React.FC<CardProps> = ({
-  children,
-  className = '',
-  onClick,
-  hover = false
-}) => {
+const Card: React.FC<CardProps> = ({ children, className = '', onClick, hover = false }) => {
   return (
     <div
       className={`
@@ -37,4 +32,3 @@ const Card: React.FC<CardProps> = ({
 };
 
 export default Card;
-

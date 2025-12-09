@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../types';
 import { useLazyQuery } from '@apollo/client/react';
@@ -83,7 +90,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [token, user]);
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, isAdmin, isAuthenticated, refreshUser }}>
+    <AuthContext.Provider
+      value={{ user, token, login, logout, isAdmin, isAuthenticated, refreshUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -96,4 +105,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

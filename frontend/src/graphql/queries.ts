@@ -1,12 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_EMPLOYEES = gql`
-  query GetEmployees(
-    $filters: EmployeeFilters
-    $page: Int
-    $pageSize: Int
-    $sort: SortInput
-  ) {
+  query GetEmployees($filters: EmployeeFilters, $page: Int, $pageSize: Int, $sort: SortInput) {
     employees(filters: $filters, page: $page, pageSize: $pageSize, sort: $sort) {
       employees {
         id
@@ -65,4 +60,3 @@ export const ME = gql`
     }
   }
 `;
-
