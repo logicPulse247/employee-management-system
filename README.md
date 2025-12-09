@@ -364,12 +364,52 @@ ultraship/
 
 ## 🚢 Deployment
 
-### Backend Deployment (Heroku/Railway/Render)
+### Render Deployment (Recommended)
+
+**Quick Start:**
+1. See [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md) for detailed step-by-step instructions
+2. See [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) for a quick checklist
+
+**Using Render Blueprint:**
+1. Push your code to GitHub/GitLab/Bitbucket
+2. In Render Dashboard: New → Blueprint
+3. Connect your repository
+4. Render will auto-detect `render.yaml` and create all services
+5. Set required environment variables (MONGODB_URI, JWT_SECRET)
+6. Deploy!
+
+**Manual Deployment:**
+
+#### Backend Deployment (Render Web Service)
+
+1. Set environment variables:
+   - `MONGODB_URI` (MongoDB Atlas connection string)
+   - `JWT_SECRET` (strong random secret)
+   - `NODE_ENV=production`
+   - `FRONTEND_URL` (your frontend URL)
+   - `JWT_EXPIRES_IN=30d`
+
+2. Build Command: `cd backend && npm install && npm run build`
+3. Start Command: `cd backend && npm start`
+4. Health Check Path: `/health`
+
+#### Frontend Deployment (Render Static Site)
+
+1. Set environment variables:
+   - `VITE_GRAPHQL_URL` (your backend GraphQL endpoint)
+   - `VITE_ENV=production`
+
+2. Build Command: `cd frontend && npm install && npm run build`
+3. Publish Directory: `dist`
+
+### Other Platforms
+
+#### Backend Deployment (Heroku/Railway)
 
 1. Set environment variables:
    - `MONGODB_URI`
    - `JWT_SECRET`
-   - `PORT`
+   - `PORT` (auto-set by platform)
    - `NODE_ENV=production`
 
 2. Build the project:
@@ -385,7 +425,7 @@ ultraship/
    npm start
    ```
 
-### Frontend Deployment (Vercel/Netlify)
+#### Frontend Deployment (Vercel/Netlify)
 
 1. Set environment variable:
    - `VITE_GRAPHQL_URL` (your backend URL)
@@ -397,7 +437,7 @@ ultraship/
    npm run build
    ```
 
-3. Deploy the `build` folder
+3. Deploy the `dist` folder
 
 ## 📝 API Documentation
 

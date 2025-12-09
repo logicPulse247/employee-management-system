@@ -80,8 +80,14 @@ app.use(
       if (!origin) {
         return callback(null, true);
       }
-      // Allow frontend URL in production
-      if (origin === env.FRONTEND_URL) {
+      // Allow frontend URL in production (with or without trailing slash)
+      const frontendUrl = env.FRONTEND_URL.replace(/\/$/, ''); // Remove trailing slash
+      const originUrl = origin.replace(/\/$/, ''); // Remove trailing slash
+      if (originUrl === frontendUrl || origin === env.FRONTEND_URL) {
+        return callback(null, true);
+      }
+      // Also allow Render preview URLs (for testing)
+      if (origin.includes('.onrender.com')) {
         return callback(null, true);
       }
       callback(new Error('Not allowed by CORS'));
