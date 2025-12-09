@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -71,7 +71,7 @@ app.use('/graphql', limiter);
 // Allow GraphQL playground and frontend
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       // In development, allow all origins for GraphQL Playground/Apollo Studio Sandbox
       if (env.NODE_ENV === 'development') {
         return callback(null, true);
@@ -99,7 +99,7 @@ app.use(
 );
 
 // Health check endpoint
-app.get(HEALTH_CHECK_PATH, async (_req, res) => {
+app.get(HEALTH_CHECK_PATH, async (_req: Request, res: Response) => {
   const dbState = mongoose.connection.readyState;
   const isDbConnected = dbState === 1; // 1 = connected
 

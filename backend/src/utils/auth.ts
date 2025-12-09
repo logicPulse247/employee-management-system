@@ -1,5 +1,4 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
-import type { StringValue } from 'ms';
 import { IUser } from '../models/User';
 import { User } from '../models/User';
 import { env } from '../config';
@@ -9,7 +8,7 @@ import { JWT_EXPIRES_IN } from '../constants';
 // Generate JWT token
 export const generateToken = (user: IUser): string => {
   const options: SignOptions = {
-    expiresIn: JWT_EXPIRES_IN as StringValue | number,
+    expiresIn: JWT_EXPIRES_IN as string | number,
   };
   return jwt.sign(
     { userId: user._id.toString(), role: user.role, username: user.username },
