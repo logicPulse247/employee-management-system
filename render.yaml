@@ -11,10 +11,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        fromService:
-          type: psmdb
-          name: ultraship-mongodb
-          property: connectionString
+        sync: false  # Set this in Render dashboard (MongoDB Atlas connection string or Render MongoDB)
       - key: JWT_SECRET
         sync: false  # Set this in Render dashboard (generate a strong random secret)
       - key: JWT_EXPIRES_IN
@@ -45,11 +42,14 @@ services:
       - key: VITE_ENV
         value: production
 
-  # MongoDB Database (Render's Percona Server for MongoDB)
-  - type: psmdb
-    name: ultraship-mongodb
-    plan: starter
-    region: oregon
-    databaseName: ultraship_employees
-    version: "7"
+  # MongoDB Database
+  # Note: Render doesn't support MongoDB directly in render.yaml
+  # Option 1: Use MongoDB Atlas (free tier available)
+  #   - Create account at https://www.mongodb.com/cloud/atlas
+  #   - Create cluster and get connection string
+  #   - Set MONGODB_URI in backend environment variables
+  # Option 2: Create MongoDB manually in Render Dashboard
+  #   - Go to Dashboard → New → MongoDB
+  #   - Create MongoDB service
+  #   - Copy connection string and set as MONGODB_URI
 
